@@ -59,11 +59,15 @@ def main(subreddit="stocks", limit = 25):
     (in the title and body of a post)
     """
     
-    print(f"Analyzing {limit} posts in r/{subreddit}...")
-    ticker_results = analyze_subreddit(subreddit, limit)
+    try:
+        print(f"Analyzing {limit} posts in r/{subreddit}...")
+        ticker_results = analyze_subreddit(subreddit, limit)
+    except:
+        print("Subreddit does not exist")
+        return
 
     print("\nTrending Tickers:")
-    for ticker, count in ticker_results.most_common(): # in ascending order
+    for ticker, count in ticker_results.most_common(): # in descending order
         print(f"{ticker}: {count} mentions")
 
 # Usage: python .\tickerBot.py "subreddit name" "limit"
